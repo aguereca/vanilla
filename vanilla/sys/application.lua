@@ -222,7 +222,7 @@ function ErrorController:error()
         view:assign(self.err)
         return view:display()
     else
-        local helpers = require 'vanilla.v.libs.utils'
+        local helpers = LoadV 'vanilla.v.libs.utils'
         ngx_log(ngx.ERR, helpers.sprint_r(self.err))
         -- return ngx_redirect("http://sina.cn?vt=4", ngx.HTTP_MOVED_TEMPORARILY)
         return helpers.sprint_r(self.err)
