@@ -101,11 +101,11 @@ end
 
 function IndexController:indext()
     -- self.parent:fff()
-    -- do return user_service:get() 
-    --           .. sprint_r(aa:idevzDobb()) 
-    --           .. sprint_r(Registry['v_sysconf']['db.client.read']['port']) 
-    --           -- .. sprint_r(self.aa:idevzDobb()) 
-    --           -- .. sprint_r(self.parent.aaa) 
+    -- do return user_service:get()
+    --           .. sprint_r(aa:idevzDobb())
+    --           .. sprint_r(Registry['v_sysconf']['db.client.read']['port'])
+    --           -- .. sprint_r(self.aa:idevzDobb())
+    --           -- .. sprint_r(self.parent.aaa)
     --           .. Registry['APP_NAME']
     --           -- .. self.d
     -- end
@@ -130,7 +130,7 @@ end
 
 -- curl -X POST http://localhost:9110/post -d '{"ok"="yes"}'
 function IndexController:post()
-    local _, post = self:getRequest():getParams()
+    local post = self:getRequest():getParams()
     print_r(post)
     do return 'post' end
 end
@@ -171,7 +171,7 @@ end
 
 -- curl -X POST http://localhost:9110/post -d '{"ok"="yes"}'
 function IdevzController:post()
-    local _, post = self:getRequest():getParams()
+    local post = self:getRequest():getParams()
     print_r(post)
     do return 'post' end
 end
@@ -842,7 +842,7 @@ conf_move()
         mkdir -p $NGINX_APP_CONF_DIR && cp -f $VA_APP_CONF_SRC $NGINX_APP_CONF
     else
         cp -f $VA_APP_CONF_SRC $NGINX_APP_CONF
-    fi 
+    fi
     echo $ECHO_E"copy \033[32m" $VA_APP_CONF_SRC "\033[0m" to "\033[31m" $NGINX_APP_CONF "\033[m";
     exit 0
 }
@@ -1061,7 +1061,7 @@ describe("PagesController", function()
                 method = 'GET',
                 path = "/"
             })
-            
+
             assert.are.same(200, response.status)
             assert.are.same("hello vanilla.", response.body_raw)
         end)
@@ -1073,7 +1073,7 @@ describe("PagesController", function()
                 method = 'GET',
                 path = "/index/buested"
             })
-            
+
             assert.are.same(200, response.status)
             assert.are.same("hello buested.", response.body_raw)
         end)
@@ -1211,7 +1211,7 @@ function VaApplication.new(app_path)
     nginx_vhost_config_tpl = sgsub(nginx_vhost_config_tpl, "{{VANILLA_ROOT}}", VANILLA_ROOT)
     nginx_vhost_config_tpl = sgsub(nginx_vhost_config_tpl, "{{VANILLA_VERSION_DIR_STR}}", VANILLA_VERSION_DIR_STR)
     VaApplication.files['nginx_conf/vhost/' .. app_name .. '.conf'] = sgsub(nginx_vhost_config_tpl, "{{APP_ROOT}}", app_path)
-    
+
     application_conf = sgsub(application_conf, "{{APP_NAME}}", app_name)
     application_conf = sgsub(application_conf, "{{VANILLA_VERSION_DIR_STR}}", VANILLA_VERSION_DIR_STR)
     application_conf = sgsub(application_conf, "{{VANILLA_ROOT}}", VANILLA_ROOT)
