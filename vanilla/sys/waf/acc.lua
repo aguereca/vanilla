@@ -1,4 +1,4 @@
-local utils = require'vanilla.v.libs.utils'
+local utils = LoadV 'vanilla.v.libs.utils'
 
 local app_waf_conf = utils.lpcall(function() return require('config.waf') end)
 local waf_conf = utils.lpcall(function() return LoadV('vanilla.sys.waf.config') end)
@@ -13,7 +13,7 @@ local ngxmatch=ngx.re.match
 local unescape=ngx.unescape_uri
 local get_headers = ngx.req.get_headers
 local optionIsOn = function (options) return options == "on" and true or false end
-local logpath = waf_conf.logdir 
+local logpath = waf_conf.logdir
 local rulepath = waf_conf.RulePath
 local ipWhitelist = waf_conf.ipWhitelist
 local ipBlocklist = waf_conf.ipBlocklist
@@ -29,7 +29,7 @@ local Redirect=optionIsOn(waf_conf.Redirect)
 local function getClientIp()
         IP = ngx.req.get_headers()["X-Real-IP"]
         if IP == nil then
-                IP  = ngx.var.remote_addr 
+                IP  = ngx.var.remote_addr
         end
         if IP == nil then
                 IP  = "unknown"
@@ -86,7 +86,7 @@ local function whiteurl()
         if wturlrules ~=nil then
             for _,rule in pairs(wturlrules) do
                 if ngxmatch(ngx.var.uri,rule,"isjo") then
-                    return true 
+                    return true
                  end
             end
         end
@@ -281,7 +281,7 @@ function Acc:check()
     elseif args() then
     elseif cookie() then
     elseif PostCheck then
-        if method=="POST" then   
+        if method=="POST" then
                 local boundary = get_boundary()
             if boundary then
             local len = string.len
